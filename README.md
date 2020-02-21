@@ -16,13 +16,13 @@ Cryptography:
 	</ul>
 </ul>
 Network:
-ul>
+<ul>
 <li>Block Explorer/Watcher</li>
 <li>Broadcasting TXs</li>
 <li>Confirm TX success</li>
 </ul>
 Files:
-ul>
+<ul>
 <li>Conform to wallet.dat format</li>
 <li>Encrypting wallet file</li>
 <li>JSON file for pub keys</li>
