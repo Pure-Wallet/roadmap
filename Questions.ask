@@ -1,0 +1,9 @@
+#Questions
+
+We should Put the wallet and pubkey JSON and maybe some other files
+in a high-up folder. This way, users can delete the app and reinstall
+it, or update it without losing these files. 
+
+How do we deal with incorrect passwords? 
+Current Idea: Store encrypted PrivKeys in Wallet.dat
+
