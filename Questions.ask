@@ -28,3 +28,8 @@ Local Web browser? -Can we run Python from here?
 Desktop App? -Can someone do this?
 Mobile? -If Java is known
 
+E) Is it worth coding in C++ and Python if we need to use Boost.io? Or should 
+everything be in one language. 
+I think the Client can be in C, and be independent from everything else. 
+This could lead to redundancy with the App.
+
