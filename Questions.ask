@@ -1,14 +1,15 @@
 #Questions
 
-<strong>A) Wallet Persistence & Upgrades </strong>
+A) Wallet Persistence & Upgrades
 We should put the wallet and pubkey JSON and maybe some other files
 in a high-up folder. This way, users can delete the app and reinstall
 it, or update it without losing these files. 
-  A2) We need to add files above or in the home directory, and add PATH
+  
+A2) We need to add files above or in the home directory, and add PATH
 to the 
 
-<strong>B) How do we deal with incorrect passwords? </strong>
-<strong>Current Idea:</strong> 
+B) How do we deal with incorrect passwords?
+Current Idea:
 1. Store encrypted PrivKeys in Wallet.dat
 2. Store SHA-256 x2 of PrivKeys (or just PubKeys).
 2. When user enters password, that password is used to decrypt PK's.
@@ -16,12 +17,12 @@ to the
 4. If True: sign, etc.
 5. Else: throw error.
 
-<strong>C) Max Attempts?</strong>
+C) Max Attempts?
 Should we delete/lock the wallet after X attempts?
 Alternative: Store current time in a LockTime file, and if user tries
 to log in before time in LockTime, app closes/rejects.
 
-<strong>D) How should we do Front-end? </strong>
+D) How should we do Front-end?
 I think we should start with a command line only wallet, and then do this stuff.
 Local Web browser? -Can we run Python from here?
 Desktop App? -Can someone do this?
