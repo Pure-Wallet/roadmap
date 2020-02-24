@@ -19,7 +19,7 @@ Cryptography:
 Network:
 <strong>LANG: Most likely Python, open to others</strong>
 <ul>
-<li>Block Explorer/Watcher</li>
+<li>Block Explorer/Watcher - Python</li>
 <li>Broadcasting TXs</li>
 <li>Confirm TX success</li>
 </ul>
@@ -30,7 +30,7 @@ Files:
 <li>Encrypting wallet file</li>
 <li>JSON file for pub keys</li>
 <li>Password storage</li>
-<li>Permissions</li>
+<li>Permissions?</li>
 </ul>
 Front End:
 <strong>LANG: Python or HTML/CSS? Java?</strong>
