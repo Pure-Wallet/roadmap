@@ -41,3 +41,10 @@ Front End:
 <li>History Page</li>
 
 </ul>
+Design:
+<ul>
+<li>Logo</li>
+<li>Each Page</li>
+<li>Menu: bar or tabs</li>
+<li>Color Scheme</li>
+</ul>
