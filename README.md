@@ -7,6 +7,7 @@ Cryptography:
 <ul>
 <li>secp256k1</li>
 <li>Key Derivation</li>
+<li>QR Codes?</li>
 <li>Signatures</li>
 <li>Transactions</li>
 	<ul>
