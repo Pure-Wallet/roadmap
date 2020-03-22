@@ -1,0 +1,101 @@
+#Vision
+
+Pure Wallet is a Bitcoin wallet. We will be building everything with Testnet as the default, but Mainnet will be available throughout development. All testing will take place on testnet. 
+DO NOT USE this for real Bitcoin. Testnet bitcoin has no monetary value. 
+There are already several great wallets available, and while this is mostly an educational project, I would like to add some unique features.
+I think the best way to build a project this big and bug-prone is to create a command-line program, and then tie functions to a GUI. I have started
+to build a <strong>rough</strong> GUI in Qt. 
+
+Outline: 
+	This wallet will generate keys, craft, sign, and broadcast transactions. It will also securely store these keys and xpubs to protect funds.
+	A simple password will unlock (decrypt) the wallet file, but a Seed Phrase (12 or 24 words) will be used to generate the keys themselves. If
+	a wallet is erased, the seed phrase can still regenerate it. Wallet files should be exportable to other wallet apps. 
+	All of this functionality is already present in other wallets, but for learning, debugging, and improvevment purposes, i'd like to avoid copy-paste.
+	For examples of better versions of what I'd like to build, see Electrum Wallet and Wasabi Wallet. Electrum, being simpler, is whatt I'm aiming for. 
+	This is the outline, and the Features are listed below. With the exception of Wallet format and Key Derivation, almost all of this is up to our decisions.
+	I would like it to adhere to Bitcoin's standards (BIPs), but broadcasting and other functions will be up to us to solve. 
+
+	3 things I'd like to prioritize:
+		1. Full backwards compatibility. I don't want updates to be necessary. 
+		2. The wallet is designed for beginners, and should only need a one-click install. At most, 1 or 2 lines of Command-line. 
+		3. The Commandline only should also be fully functional on its own. 
+
+Plan:
+	I will be building the Crypto library in Python, and translating it once I'm done, into C++. This will require extensive testing, because it is central
+	to the entire project. From there, I will try to figure out the Security portion. With Crypto and Security, we have a fully functional cold wallet, capable
+	of creating keys, crafting and signing transactions, and storing this information. Next, Networking will turn the cold wallet hot, allowing us to query balances,
+	broadcast transactions, and use the wallet practically. A Front end will simply call all of these functions. 
+
+Features:
+1. Creating Bitcoin Keys - Crypto
+	This will be taken mostly from Programming Bitcoin.
+	a. Generating generic, single-use P2PK(H) addresses for paper wallets. This is the simplest function.
+		I. Optional user-added entropy (randomness).
+		II. Options to save to file (with encryption).
+		III. Ability to copy PubKey to clipboard.
+	b. Handling Hierarchical Deterministic Wallets:
+		I. One Seed Phrase (12 or 24-words) which yields many Private Keys and PubKeys
+		II. This functionality is all specified in Bitcoin's BIPs, and are implemented in many other wallets
+		III. Recovery of a wallet should be simple and interoperable (Also see BIPs)
+	c. Easy generation of new addresses
+		I. With one click, the user should be able to generate a new address from their HD wallet, in order to make receiving Easy
+		II. Auto copy this address to clipboard
+		III. QRcode available
+		IV. Save which addresses are generated, to make watching easier. 
+	d. Exporting XPubs should be easy but separate from addresses	
+		I. Avoid confusion
+
+2. Transactions - Crypto
+	This will be taken mostly from Programming Bitcoin.
+	a. With Bitcoin keys, the wallet will be able to craft and sign transactions to a variety of destinations.
+		I. P2PK and P2PKH first, as they are the simplest. These are a simple PubKey and PrivKey pair that the wallet Does not store.
+		II. P2SH will also be possible
+		III. SegWit I think should wait until we have a functional legacy system. 
+
+	b. Partially-Signed Bitcoin Transactions
+		I. These should also be added after the base layer is functional
+
+	c. Crafting Transactions is easiest if an index of owned UTXOs is kept. 
+		I. This allows for offline transaction creation
+
+3. Blockchain & Network - Network (or FrontEnd)
+	I am unfamiliar with C++ API capabilities and may rely on Python until I am more comfortable with C++
+	a. The Wallet should be able to query the blockchain, likely through API with Blockstream. 
+		I. There is no need to see the entire blockchain. The wallet only needs to know the status of its own balance.
+		II. Confirmations should be checked for by running a script upon transaction broadcasting / address generation
+	b. I would like to enable users to connect their Pure Wallet to their own Node, to avoid using public APIs.
+		I. This is an advanced feature, and will be added last
+	c. Decision: Should the wallet act as an SPV Node and constantly run a script, watching the blockchain at all times?
+		
+	d. This entire process is easiest in Python, while the rest of the app will be C++. 
+	e. Transactions must be broadcast directly to the Bitcoin Network, perhaps through Blockstream?
+
+
+4. Security - Security
+	a. This part is almost all undecided, and will probably change greatly as I learn. 
+	b. This wallet will not be the most secure, given my level of experience. However, it should be passable. 
+		I. Password is directly used to decrypt wallet file and xpubs. 
+			A. Wallet will be binary file (.dat) while Xpubs will be JSON file
+		II. Password demanded at launch, to decrypt XPub, and demanded at Transaction time, to decrypt Private Key and sign.
+		III. Generating Addresses doesnt require password
+		IV. Files should be stored high up, separate from the app to allow for upgrades and deleting the app without losing the wallet
+
+5. Front End - Front End
+	a. Have several pages. Simplicity and Ease of Use is paramount. 
+	b. Big Buttons for main functions. 
+	c. Advanced functions smaller, more hidden
+	d. For now, I think Qt is best, because we can directly tie to a C++ function. 
+	e. Qt also includes networking library?
+	f. Pages:
+		I. Send
+			A. I plan to copy the setup from Electrum, having boxes for address, amount, fee, etc.
+		II. Receive (Generate new address)
+			B. I plan to copy from Wasabi, with a Generate Button, and a list of generated (but unpaid) addresses.
+		III. Settings 
+			A. Password 
+			B. XPubs 
+			C. Advanced functions
+		IV. History
+			A. Show all transactions, with confirmations, amounts, address, TxID, etc.
+
+	g. We still need a logo, color scheme, and style
